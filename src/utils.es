@@ -1,6 +1,6 @@
 import punycode from 'punycode';
 import escapeHtml from 'escape-html';
-import tldsRegex from '../vendor/regex';
+import tldsRegex from './tlds';
 
 const PUNCTUATION = '([\\s-.,\'":;!?]+)';
 const REGEX_PUNCTUATION = /[\s:.,!?"';\-–()[\]…]+$/;

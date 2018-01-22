@@ -1,0 +1,2 @@
+// GENERATED AUTOMATICALLY, DO NOT EDIT
+export default '(m(?:il|[ac-hk-z])|c(?:om?|[acdf-ik-nru-z])|e(?:du|[ceghr-u])|g(?:ov|[abd-il-np-uwy])|int|n(?:et|[acfgilopruz])|o(?:rg|m)|z[amw]|in|w[fs]|s[a-eg-or-vx-z]|r[eosuw]|k[eg-imnprwyz]|ne|j[emop]|y[et]|t[cdf-hj-prtvwz]|d[ejkmoz]|b[abd-jl-oq-tvwyz]|a[c-gil-oq-uwxz]|qa|l[a-cikr-vy]|p[ae-hk-nr-twy]|v[aceginu]|i[delmoq-t]|u[agkmsyz]|h[kmnrtu]|f[i-kmor])';
