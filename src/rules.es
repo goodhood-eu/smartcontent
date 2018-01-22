@@ -1,4 +1,4 @@
-import { SHORTENED_STRING_TOKEN } from './utils';
+import { SHORTENED_STRING_TOKEN } from './strings';
 
 import {
   isDomainOk,
