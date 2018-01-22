@@ -1,13 +1,13 @@
 import punycode from 'punycode';
 import escapeHtml from 'escape-html';
-import { list as tlds } from '../vendor/tlds';
+import tldsRegex from '../vendor/regex';
 
 const PUNCTUATION = '([\\s-.,\'":;!?]+)';
 const REGEX_PUNCTUATION = /[\s:.,!?"';\-–()[\]…]+$/;
 
 export const SHORTENED_STRING_TOKEN = '…';
 
-export const REGEX_KNOWN_DOMAIN = new RegExp(`\\.(${tlds.join('|')})$`);
+export const REGEX_KNOWN_DOMAIN = new RegExp(`\\.(${tldsRegex})$`);
 export const REGEX_EMAIL_SIGN = /^@/;
 export const REGEX_URL_PREFIX = /^(https?:\/\/)/;
 
