@@ -1,13 +1,13 @@
 const { assert } = require('chai');
 const { unicodeLength } = require('../lib/utils');
-import createParser from '../lib';
+const createParser = require('../lib').default;
 
 let process = null;
 
 describe('modules/smartcontent', () => {
   beforeEach(() => { process = createParser(); });
 
-  it('createParser', () => {
+  it('createParser - extend rules', () => {
     const rules = {
       custom: {
         pattern: /^(fuck|suck|cock)/,
@@ -32,12 +32,17 @@ describe('modules/smartcontent', () => {
     assert.equal(customParser(text), expected, 'additional rules work');
   });
 
-  it('createParser', () => {
-    const mutate = (rules) => {
-      rules.url.compile = () => 'THISISURL';
+  it('createParser - mutate rules', () => {
+    const rules = {
+      url: {
+        compile() {
+          return 'THISISURL';
+        },
+      },
     };
 
-    const customParser = createParser(null, mutate);
+
+    const customParser = createParser(rules);
 
     const text = 'hoho google.com is a url';
     const expected = 'hoho THISISURL is a url';

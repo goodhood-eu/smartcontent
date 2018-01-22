@@ -18,7 +18,7 @@ Rules are an object consisting of objects in the following format:
 ```
 ruleName: {
   // A regular expression that matches content. It must start with "^".
-  pattern: /^\w/,
+  pattern: /^\w+/,
 
 
 
@@ -68,5 +68,6 @@ This function takes a string of text and length to shorten to. Returns HTML with
 import createParser from 'smartcontent';
 
 const text = 'check this out: google.com/search?q=nebenan.de';
-process(text); // => 'check this out: <a href="https://google.com/search?q=nebenan.de">google.com/…</a>'
+process(text);
+// => 'check this out: <a href="https://google.com/search?q=nebenan.de">google.com/…</a>'
 ```

@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const normalize = require('../lib/normalize');
+const normalize = require('../lib/normalize').default;
 
 describe('modules/smartcontent/normalize', () => {
   it('normalize - newlines', () => {
