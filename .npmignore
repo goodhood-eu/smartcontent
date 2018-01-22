@@ -1,6 +1,7 @@
 !lib/
 src/
 test/
+vendor/
 .babelrc
 .eslintignore
 .eslintrc

@@ -7,7 +7,7 @@ Generates HTML from User Generated Content to normalize input and create clickab
 
 This package is intended to be used as a lightweight replacement for markdown. By default it only replaces links with link tags and normalizes whitespace, but can be easily extended to also display image urls as images, add text styling and much more.
 
-Unlike markdown, this module allows for easy text shortening that can cut through links, preserving links clickability. Works well with Unicode and can cut through emoji properly.
+Unlike markdown, this module allows for easy text shortening that can cut through links, preserving links clickability. Works well with Unicode and can cut through emoji properly. Based on excellent [simple-markdown](https://github.com/Khan/simple-markdown).
 
 ### Create parser
 Module exports a function to create your own parser. This function takes a rules object to add new rules and customize existing ones. Returns a parser function.
