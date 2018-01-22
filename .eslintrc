@@ -1,0 +1,39 @@
+{
+  "extends": ["airbnb"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "no-console": "off",
+    "no-restricted-syntax": [
+      "error",
+
+      "LabeledStatement",
+      "WithStatement",
+      "YieldExpression"
+    ],
+    "space-before-function-paren": ["error", "never"],
+    "global-require": "off",
+    "default-case": "off",
+    "no-continue": "off",
+    "prefer-template": "warn",
+    "arrow-parens": ["error", "always"],
+    "no-floating-decimal": "off",
+    "func-names": ["error", "never"],
+    "camelcase": "off",
+    "consistent-return": "off",
+    "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
+    "no-param-reassign": ["error", { "props": false }],
+    "class-methods-use-this": "off", // can be enabled after coffee->es6 migration is complete
+    "no-underscore-dangle": "off",
+    "object-curly-newline": "off", // forces to write illegible code
+    "function-paren-newline": "off", // forces to write illegible code
+    "prefer-destructuring": "off", // forces to write broken code!
+
+    "import/no-unresolved": "off",
+    "import/no-dynamic-require": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+  }
+}
