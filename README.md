@@ -17,45 +17,54 @@ Rules are an object consisting of objects in the following format:
 
 ```
 ruleName: {
-  // A regular expression that matches content. It must start with "^".
+  // Required. Has to start with /^, matches tokens to be received by parser
   pattern: /^\w+/,
 
 
 
-  // Method that converts matches to AST node.
+  // Required. Method that converts matches to AST node.
   // Arguments:
   //   matches - array of matches form RegExp.exec
   //   parser - a parser function to allow recursion, takes text argument to parse and returns AST
   //   state - a state object to share parser state between calls/rules
   //   ast - currently parsed AST (nested collection of objects/arrays)
-  // Returns: AST node - object or array of objects with props
-  //   content - string to determine text length
-  //   type - (optional) - type of parser to use
+  // Returns: an object or an array of objects, containing:
+  //   type: optional, string with name of compiler to use. will default to rule name
+  //   content: optional, string representing content, can be automatically shortened
+  //            if needed by the root compiler.
   //   ... any additional props to pass down to parser
 
   parse(matches, parser, state, ast) { return { content: matches[0] } },
 
 
 
-  // Method that converts AST node into HTML string.
+  // Required. Method that converts AST node into HTML string.
   // Arguments:
   //   node - AST node object that was returned from parser
   //   compiler - a compiler function to allow recursion, takes AST node and returns HTML
   //   state - a state object to share compiler state between calls/rules
-  // Returns: HTML string
+  // Returns: compiled HTML string. Should take care of
+  //           XSS injections and escape content!
 
   compile(node, compiler, state) { return node.content; },
 
 
 
-  // Method that shortens text and returns HTML.
+  // Optional. Method that shortens text and returns HTML. Allows for customized shortening.
   // Arguments:
   //   node - AST node object that was returned from parser
   //   limit - length limit
   //   compiler - a compiler function to allow recursion, takes AST node and returns HTML
-  // Returns: HTML string
+  // Returns: compiled HTML string. Should take care of
+  //           XSS injections and escape content!
 
   shorten(node, limit, compile) { return node.content.slice(0, limit); },
+
+
+
+  // Optional. Number that shows order in which rule to be executed relative to
+  //         others, bigger means later.
+  order: 1,
 },
 ```
 
@@ -63,7 +72,6 @@ ruleName: {
 This function takes a string of text and length to shorten to. Returns HTML with text shortened to desired length. **Please be advised, that it shortens text content and not the HTML string itself!**
 
 ## Examples:
-
 ```
 import createParser from 'smartcontent';
 
