@@ -127,6 +127,10 @@ describe('modules/smartcontent', () => {
     const typo2 = 'wow -http://google.com ok';
     const expectedTypo2 = 'wow -<a href="http://google.com">http://google.com</a> ok';
 
+    const regularForeign = 'wow https://www.google.de/awesomesauce ok';
+    const expectedRegularForeign = 'wow <a href="https://www.google.de/awesomesauce">https://www.google.de/…</a> ok';
+
+
     assert.equal(process(notADomain), notADomain, 'domain-like string didn\'t get parsed');
     assert.equal(process(domainLike), expectedDomainLike, 'weird domain-like url highlighted only url-like part');
     assert.equal(process(domainLikeTypo), domainLikeTypo, 'domain-like typos are not processed');
@@ -139,6 +143,7 @@ describe('modules/smartcontent', () => {
     assert.equal(process(longText), expectedLongText, 'long text ending with a URL');
     assert.equal(process(typo), typo, 'bail when url starts with punctuation');
     assert.equal(process(typo2), expectedTypo2, 'full url with typo works');
+    assert.equal(process(regularForeign), expectedRegularForeign, '.de domain zone');
   });
 
   it('process - weird URL detection', () => {
