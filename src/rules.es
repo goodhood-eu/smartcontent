@@ -67,7 +67,9 @@ const rules = {
 
   url: {
     // Doesn't handle weird native language urls, like WWW.FIRMA.XN--VERMGENSBERATER-CTB
-    pattern: /^(?:https?:\/\/)?((?:[^\u0000-\u007F]|[\w-])+\.(?:(?:[^\u0000-\u007F]|[\w-]){2,}\.)*(?:[^\u0000-\u007F]|[a-zA-Z]){2,})(?::\d+)?(\/(?:(?:[^\u0000-\u007F]|[\w/.,'"@+=!:;=%()-])+)?(?:\.(?:[^\u0000-\u007F]|[\w-])+)?)?((?:\?|#)\S+)?/,
+    // Domain segment used to be {2,} (around `(?:[^\u0000-\u007F]|[a-zA-Z]){2,})(?::\d+)`)
+    // This causes strange bug in safari where only 3+ characters are matched
+    pattern: /^(?:https?:\/\/)?((?:[^\u0000-\u007F]|[\w-])+\.(?:(?:[^\u0000-\u007F]|[\w-]){2,}\.)*(?:[^\u0000-\u007F]|[a-zA-Z])+)(?::\d+)?(\/(?:(?:[^\u0000-\u007F]|[\w/.,'"@+=!:;=%()-])+)?(?:\.(?:[^\u0000-\u007F]|[\w-])+)?)?((?:\?|#)\S+)?/,
     parse(matches, parse, state, ast) {
       const type = 'text';
       const [original, domain] = matches;

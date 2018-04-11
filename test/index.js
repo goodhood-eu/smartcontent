@@ -97,7 +97,8 @@ describe('modules/smartcontent', () => {
     const notADomain = 'a.b.c. 01.02 01.02.03';
 
     const domainLike = 'ab.cd.e';
-    const expectedDomainLike = '<a href="http://ab.cd">ab.cd</a>.e';
+    const expectedDomainLike = 'ab.cd.e';
+    // const expectedDomainLike = '<a href="http://ab.cd">ab.cd</a>.e';
 
     const domainLikeTypo = 'hallo ich wohnein.berlin :)';
 
