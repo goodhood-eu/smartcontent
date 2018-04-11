@@ -32,15 +32,15 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-stage-3": "6.24.1",
     "babel-plugin-transform-runtime": "6.23.0",
-    "babel-plugin-transform-node-env-inline": "0.2.0",
-    "eslint": "4.16.0",
-    "eslint-plugin-import": "2.8.0",
+    "babel-plugin-transform-node-env-inline": "0.4.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-import": "2.10.0",
     "eslint-config-airbnb-base": "12.1.0",
-    "mocha": "5.0.0",
+    "mocha": "5.0.5",
     "chai": "4.1.2"
   },
   "dependencies": {
     "escape-html": "^1.0.3",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.5"
   }
 }
