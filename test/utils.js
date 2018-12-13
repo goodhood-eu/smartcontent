@@ -20,7 +20,7 @@ const safeUrl = 'https://google.com';
 const shortUrl = 'nebenan.de/feed';
 
 
-describe('modules/smartcontent/utils', () => {
+describe('utils', () => {
   it('has', () => {
     const Klass = function() { this.a = true; };
     Klass.prototype.c = true;

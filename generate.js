@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { Trie } = require('regexgen');
-const { list } = require('./vendor/tlds');
+const list = require('tlds');
 
 const file = `${__dirname}/src/tlds.es`;
 
