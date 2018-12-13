@@ -4,7 +4,7 @@ const createParser = require('../lib').default;
 
 let process = null;
 
-describe('modules/smartcontent', () => {
+describe('index', () => {
   beforeEach(() => { process = createParser(); });
 
   it('createParser - extend rules', () => {
@@ -100,7 +100,7 @@ describe('modules/smartcontent', () => {
     const expectedDomainLike = 'ab.cd.e';
     // const expectedDomainLike = '<a href="http://ab.cd">ab.cd</a>.e';
 
-    const domainLikeTypo = 'hallo ich wohnein.berlin :)';
+    const domainLikeTypo = 'hallo ich wohnein.notadomain :)';
 
     const short = 'a google.com: b c';
     const expectedShort = 'a <a href="http://google.com">google.com</a>: b c';
@@ -131,6 +131,12 @@ describe('modules/smartcontent', () => {
     const regularForeign = 'wow https://www.google.de/awesomesauce ok';
     const expectedRegularForeign = 'wow <a href="https://www.google.de/awesomesauce">https://www.google.de/…</a> ok';
 
+    const newTLDS = 'Check this out nice.berlin its cool!';
+    const expectedNewTLDS = 'Check this out <a href="http://nice.berlin">nice.berlin</a> its cool!';
+    const nationalDomain = 'Зайди на сайт купи.москва и купи москву!';
+    const expectedNationalDomain = 'Зайди на сайт <a href="http://купи.москва">купи.москва</a> и купи москву!';
+    const chineseDomain = '访问我的新网站 阴茎.電訊盈科!';
+    const expectedChineseDomain = '访问我的新网站 <a href="http://阴茎.電訊盈科">阴茎.電訊盈科</a>!';
 
     assert.equal(process(notADomain), notADomain, 'domain-like string didn\'t get parsed');
     assert.equal(process(domainLike), expectedDomainLike, 'weird domain-like url highlighted only url-like part');
@@ -145,6 +151,9 @@ describe('modules/smartcontent', () => {
     assert.equal(process(typo), typo, 'bail when url starts with punctuation');
     assert.equal(process(typo2), expectedTypo2, 'full url with typo works');
     assert.equal(process(regularForeign), expectedRegularForeign, '.de domain zone');
+    assert.equal(process(newTLDS), expectedNewTLDS, 'new extended TLDS');
+    assert.equal(process(nationalDomain), expectedNationalDomain, 'natial domain');
+    assert.equal(process(chineseDomain), expectedChineseDomain, 'chinese symbols parsing');
   });
 
   it('process - weird URL detection', () => {

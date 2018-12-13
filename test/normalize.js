@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const normalize = require('../lib/normalize').default;
 
-describe('modules/smartcontent/normalize', () => {
+describe('normalize', () => {
   it('normalize - newlines', () => {
     const strangeContent = 'blah blah \r\n\n\n\n\r awesome \r\n';
     assert.equal(normalize(strangeContent), 'blah blah \n\n\n\n\n awesome', 'normalizes returns properly');

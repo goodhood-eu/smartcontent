@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "escape-html": "^1.0.3",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "tlds": "^1.203.1"
   }
 }

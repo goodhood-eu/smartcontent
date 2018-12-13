@@ -29,6 +29,7 @@
     "object-curly-newline": "off", // forces to write illegible code
     "function-paren-newline": "off", // forces to write illegible code
     "prefer-destructuring": "off", // forces to write broken code!
+    "no-control-regex": "off",
 
     "import/no-unresolved": "off",
     "import/no-dynamic-require": "off",
