@@ -76,6 +76,6 @@ This function takes a string of text and length to shorten to. Returns HTML with
 import createParser from 'smartcontent';
 
 const text = 'check this out: google.com/search?q=nebenan.de';
-process(text);
+transform(text);
 // => 'check this out: <a href="https://google.com/search?q=nebenan.de">google.com/…</a>'
 ```

@@ -2,10 +2,10 @@ const { assert } = require('chai');
 const { unicodeLength } = require('../lib/strings');
 const createParser = require('../lib');
 
-let process = null;
+let transform = null;
 
 describe('index', () => {
-  beforeEach(() => { process = createParser(); });
+  beforeEach(() => { transform = createParser(); });
 
   it('createParser - extend rules', () => {
     const rules = {
@@ -49,36 +49,36 @@ describe('index', () => {
     assert.equal(customParser(text), expected, 'mutating rules work');
   });
 
-  it('process - XSS Safe', () => {
+  it('transform - XSS Safe', () => {
     const xss = 'fancy <script>alert(1);</script> pants';
     const escapedXSS = 'fancy &lt;script&gt;alert(1);&lt;/script&gt; pants';
-    assert.equal(process(xss), escapedXSS, 'xss safe');
+    assert.equal(transform(xss), escapedXSS, 'xss safe');
   });
 
-  it('process - paragraphs', () => {
+  it('transform - paragraphs', () => {
     const string = 'a \n\n\n\n\n\n\n\n\n\n b \n c \n\n\n d \n\n e';
     const expected = 'a<br /><br />b<br />c<br /><br />d<br /><br />e';
     const shortened = 'a…';
-    assert.equal(process(string), expected, 'removed extra linebreaks');
-    assert.equal(process(string, 3), shortened, 'shortened correctly');
+    assert.equal(transform(string), expected, 'removed extra linebreaks');
+    assert.equal(transform(string, 3), shortened, 'shortened correctly');
   });
 
-  it('process - newline', () => {
+  it('transform - newline', () => {
     const string = 'a \n   b';
     const expected = 'a<br />b';
     const shortened = 'a…';
 
-    assert.equal(process(string), expected, 'linebreaks work');
-    assert.equal(process(string, 2), shortened, 'shorten work');
+    assert.equal(transform(string), expected, 'linebreaks work');
+    assert.equal(transform(string, 2), shortened, 'shorten work');
   });
 
-  it('process - whitespace', () => {
+  it('transform - whitespace', () => {
     const string = 'abraham            babraham';
     const expected = 'abraham babraham';
-    assert.equal(process(string), expected, 'whitespace fixed');
+    assert.equal(transform(string), expected, 'whitespace fixed');
   });
 
-  it('process - brackets', () => {
+  it('transform - brackets', () => {
     const text = 'abra (cababra google.com/awesome) etc etc';
     const expected = 'abra (cababra <a href="http://google.com/awesome">google.com/…</a>) etc etc';
     const expectedShort1 = 'abra (cababra <a href="http://google.com/awesome">google.com/…</a>…';
@@ -87,13 +87,13 @@ describe('index', () => {
     const parens = '(lol?) (info@diderot-berlin.de)';
     const expectedParens = '(lol?) (info@diderot-berlin.de)';
 
-    assert.equal(process(text), expected, 'compiles brackets properly');
-    assert.equal(process(text, 27), expectedShort1, 'shortens brackes and nested content correctly');
-    assert.equal(process(text, 14), expectedShort2, 'shortens links inside nested content correctly');
-    assert.equal(process(parens), expectedParens, 'email with parentheses around');
+    assert.equal(transform(text), expected, 'compiles brackets properly');
+    assert.equal(transform(text, 27), expectedShort1, 'shortens brackes and nested content correctly');
+    assert.equal(transform(text, 14), expectedShort2, 'shortens links inside nested content correctly');
+    assert.equal(transform(parens), expectedParens, 'email with parentheses around');
   });
 
-  it('process - URL detection', () => {
+  it('transform - URL detection', () => {
     const notADomain = 'a.b.c. 01.02 01.02.03';
 
     const domainLike = 'ab.cd.e';
@@ -138,25 +138,25 @@ describe('index', () => {
     const chineseDomain = '访问我的新网站 阴茎.電訊盈科!';
     const expectedChineseDomain = '访问我的新网站 <a href="http://阴茎.電訊盈科">阴茎.電訊盈科</a>!';
 
-    assert.equal(process(notADomain), notADomain, 'domain-like string didn\'t get parsed');
-    assert.equal(process(domainLike), expectedDomainLike, 'weird domain-like url highlighted only url-like part');
-    assert.equal(process(domainLikeTypo), domainLikeTypo, 'domain-like typos are not processed');
-    assert.equal(process(short), expectedShort, 'domain only url detected');
-    assert.equal(process(shortQuot), expectedShortQuot, 'domain only url in quotes detected');
-    assert.equal(process(shortQuotDot), expectedShortQuotDot, 'domain only url in quotes with dots detected');
-    assert.equal(process(short2), expectedShort2, 'domain only url with path detected');
-    assert.equal(process(short3), expectedShort3, 'domain only url with query detected');
-    assert.equal(process(short4), expectedShort4, 'domain only complex url');
-    assert.equal(process(longText), expectedLongText, 'long text ending with a URL');
-    assert.equal(process(typo), typo, 'bail when url starts with punctuation');
-    assert.equal(process(typo2), expectedTypo2, 'full url with typo works');
-    assert.equal(process(regularForeign), expectedRegularForeign, '.de domain zone');
-    assert.equal(process(newTLDS), expectedNewTLDS, 'new extended TLDS');
-    assert.equal(process(nationalDomain), expectedNationalDomain, 'natial domain');
-    assert.equal(process(chineseDomain), expectedChineseDomain, 'chinese symbols parsing');
+    assert.equal(transform(notADomain), notADomain, 'domain-like string didn\'t get parsed');
+    assert.equal(transform(domainLike), expectedDomainLike, 'weird domain-like url highlighted only url-like part');
+    assert.equal(transform(domainLikeTypo), domainLikeTypo, 'domain-like typos are not transformed');
+    assert.equal(transform(short), expectedShort, 'domain only url detected');
+    assert.equal(transform(shortQuot), expectedShortQuot, 'domain only url in quotes detected');
+    assert.equal(transform(shortQuotDot), expectedShortQuotDot, 'domain only url in quotes with dots detected');
+    assert.equal(transform(short2), expectedShort2, 'domain only url with path detected');
+    assert.equal(transform(short3), expectedShort3, 'domain only url with query detected');
+    assert.equal(transform(short4), expectedShort4, 'domain only complex url');
+    assert.equal(transform(longText), expectedLongText, 'long text ending with a URL');
+    assert.equal(transform(typo), typo, 'bail when url starts with punctuation');
+    assert.equal(transform(typo2), expectedTypo2, 'full url with typo works');
+    assert.equal(transform(regularForeign), expectedRegularForeign, '.de domain zone');
+    assert.equal(transform(newTLDS), expectedNewTLDS, 'new extended TLDS');
+    assert.equal(transform(nationalDomain), expectedNationalDomain, 'natial domain');
+    assert.equal(transform(chineseDomain), expectedChineseDomain, 'chinese symbols parsing');
   });
 
-  it('process - weird URL detection', () => {
+  it('transform - weird URL detection', () => {
     const dash = 'Foo http://www.erlangen.de/desktopdefault.aspx/tabid-1419/ bar';
     const expectedDash = 'Foo <a href="http://www.erlangen.de/desktopdefault.aspx/tabid-1419/">http://www.erlangen.de/…</a> bar';
 
@@ -202,25 +202,25 @@ describe('index', () => {
     const native4 = 'щачло https://жепь.рф/ебрило.png?тест=правда&картинка=пепяка.jpg#еще=ф,е,н-х/у/й; попячъ';
     const expectedNative4 = 'щачло <a href="https://жепь.рф/ебрило.png?тест=правда&картинка=пепяка.jpg#еще=ф,е,н-х/у/й">https://жепь.рф/…</a>; попячъ';
 
-    assert.equal(process(dash), expectedDash, 'url with dashes in path detected');
-    assert.equal(process(punctuation), expectedPunctuation, 'url with dashes in domain detected');
-    assert.equal(process(port), expectedPort, 'url with port detected');
-    assert.equal(process(quote), expectedQuote, 'url with quote detected');
-    assert.equal(process(comma), expectedComma, 'url with comma detected');
-    assert.equal(process(hash), expectedHash, 'url with hash detected');
-    assert.equal(process(googleMaps), expectedGoogleMaps, 'url with @ sign detected');
-    assert.equal(process(wiki), expectedWiki, 'url with parens () detected');
-    assert.equal(process(query), expectedQuery, 'short url format with query detected');
-    assert.equal(process(java), expectedJava, 'webserver from java people url parsing');
-    assert.equal(process(quot), expectedQuot, 'surrounding url in quotation');
+    assert.equal(transform(dash), expectedDash, 'url with dashes in path detected');
+    assert.equal(transform(punctuation), expectedPunctuation, 'url with dashes in domain detected');
+    assert.equal(transform(port), expectedPort, 'url with port detected');
+    assert.equal(transform(quote), expectedQuote, 'url with quote detected');
+    assert.equal(transform(comma), expectedComma, 'url with comma detected');
+    assert.equal(transform(hash), expectedHash, 'url with hash detected');
+    assert.equal(transform(googleMaps), expectedGoogleMaps, 'url with @ sign detected');
+    assert.equal(transform(wiki), expectedWiki, 'url with parens () detected');
+    assert.equal(transform(query), expectedQuery, 'short url format with query detected');
+    assert.equal(transform(java), expectedJava, 'webserver from java people url parsing');
+    assert.equal(transform(quot), expectedQuot, 'surrounding url in quotation');
 
-    assert.equal(process(native1), expectedNative1, 'string with umlauts');
-    assert.equal(process(native2), expectedNative2, 'string with cyrillic');
-    assert.equal(process(native3), expectedNative3, 'cyrillic domain');
-    assert.equal(process(native4), expectedNative4, 'cyrillic domain with cyrrilic query');
+    assert.equal(transform(native1), expectedNative1, 'string with umlauts');
+    assert.equal(transform(native2), expectedNative2, 'string with cyrillic');
+    assert.equal(transform(native3), expectedNative3, 'cyrillic domain');
+    assert.equal(transform(native4), expectedNative4, 'cyrillic domain with cyrrilic query');
   });
 
-  it('process - email detection/shortening', () => {
+  it('transform - email detection/shortening', () => {
     const url = 'abc bob@gmail.com def';
 
     const url2 = 'abc bob.bobson@gmail.com def';
@@ -248,30 +248,30 @@ describe('index', () => {
     const doubleWrap = 'abc <<bob@gmail.com>> def';
     const expectedDoubleWrap = 'abc &lt;&lt;bob@gmail.com&gt;&gt; def';
 
-    assert.equal(process(url), url, 'email processed correcly');
-    assert.equal(process(url2), url2, 'email with a dot processed correcly');
-    assert.equal(process(url2, 10), expectedShort, 'email shortened correcly');
-    assert.equal(process(url2, 25), expectedShort2, 'email longer text shortened correcly');
+    assert.equal(transform(url), url, 'email transformed correcly');
+    assert.equal(transform(url2), url2, 'email with a dot transformed correcly');
+    assert.equal(transform(url2, 10), expectedShort, 'email shortened correcly');
+    assert.equal(transform(url2, 25), expectedShort2, 'email longer text shortened correcly');
 
-    assert.equal(process(emailDash), emailDash, 'email with a dot processed correcly');
+    assert.equal(transform(emailDash), emailDash, 'email with a dot transformed correcly');
 
-    assert.equal(process(native1), native1, 'native email with cyrillic domain');
-    assert.equal(process(native2), native2, 'native email with mixed cyrillic/german');
-    assert.equal(process(emailDot), emailDot, 'email with a dot');
-    assert.equal(process(emailDotdot), emailDotdot, 'email with two dots');
-    assert.equal(process(emailDotdot2), emailDotdot2, 'email with two dots in domain');
-    assert.equal(process(emailDotattack), emailDotattack, 'email with two dots one after another');
-    assert.equal(process(emailCopied), expectedEmailCopied, 'someone copied email into text form');
-    assert.equal(process(doubleWrap), expectedDoubleWrap, 'doublewrap');
+    assert.equal(transform(native1), native1, 'native email with cyrillic domain');
+    assert.equal(transform(native2), native2, 'native email with mixed cyrillic/german');
+    assert.equal(transform(emailDot), emailDot, 'email with a dot');
+    assert.equal(transform(emailDotdot), emailDotdot, 'email with two dots');
+    assert.equal(transform(emailDotdot2), emailDotdot2, 'email with two dots in domain');
+    assert.equal(transform(emailDotattack), emailDotattack, 'email with two dots one after another');
+    assert.equal(transform(emailCopied), expectedEmailCopied, 'someone copied email into text form');
+    assert.equal(transform(doubleWrap), expectedDoubleWrap, 'doublewrap');
   });
 
-  it('process - URL shortening', () => {
+  it('transform - URL shortening', () => {
     const longUrl = 'Check this out: http://google.com/?q=robot+unicorn+porn+three+robot+girls+polish+his+horn !!!';
     const expected = 'Check this out: <a href="http://google.com/?q=robot+unicorn+porn+three+robot+girls+polish+his+horn">http://google.com/…</a>…';
     const expected2 = 'Check this out: …';
 
-    assert.equal(process(longUrl, 36), expected, 'url cut correctly');
-    assert.equal(process(longUrl, 17), expected2, 'url cut avoided correctly');
+    assert.equal(transform(longUrl, 36), expected, 'url cut correctly');
+    assert.equal(transform(longUrl, 17), expected2, 'url cut avoided correctly');
   });
 
   it('text - weird symbols parsing', () => {
@@ -286,10 +286,10 @@ describe('index', () => {
 
     const expected = '🕹❤️🚜 <a href="http://apple.com">apple.com</a><br /><br />çÿkä (błÿåt&gt; <a href="http://google.com">google.com</a> ҳӯй…';
 
-    assert.equal(process(text, 60), expected, 'long text processed correctly');
+    assert.equal(transform(text, 60), expected, 'long text transformed correctly');
   });
 
-  it('process - text shortening', () => {
+  it('transform - text shortening', () => {
     const text = `
     Lorem ipsum dolor (sit amet), consectetur adipisicing elit, sed do eiusmod tempor
     incididunt ut labore et dolore magna aliqua.
@@ -306,9 +306,9 @@ describe('index', () => {
 
     const limit = 100;
 
-    let result = process(text, limit);
+    let result = transform(text, limit);
     result = result.replace(/<.+>/g, ''); // remove html and ending char
     assert.isAtMost(unicodeLength(result), limit, 'content shortened below limit');
-    assert.equal(process(text, 25), expected, 'parens shortened correctly');
+    assert.equal(transform(text, 25), expected, 'parens shortened correctly');
   });
 });

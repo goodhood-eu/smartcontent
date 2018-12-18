@@ -104,7 +104,7 @@ const compile = (originalAst, limit, rules, state) => {
   return compileTree(originalAst);
 };
 
-const process = (text, limit, rules, order) => {
+const transform = (text, limit, rules, order) => {
   const state = {};
 
   const normalized = normalize(text);
@@ -122,7 +122,7 @@ const createParser = (extraRules) => {
   const rules = merge({}, orderedDefaultRules, injectOrder(extraRules));
   const order = getRuleOrder(rules);
 
-  return (text = '', limit = 0) => process(text, limit, rules, order);
+  return (text = '', limit = 0) => transform(text, limit, rules, order);
 };
 
 export default createParser;

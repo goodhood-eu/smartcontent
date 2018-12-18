@@ -6,7 +6,7 @@
   "readmeFilename": "README.md",
   "repository": "good-hood-gmbh/smartcontent",
   "bugs": "https://github.com/good-hood-gmbh/smartcontent/issues",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "keywords": [
     "content",
     "parser",
@@ -28,10 +28,10 @@
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-json-strings": "^7.2.0",
+    "@babel/plugin-transform-strict-mode": "^7.2.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/register": "^7.0.0",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-plugin-transform-node-env-inline": "^0.4.3",
     "chai": "^4.2.0",
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",

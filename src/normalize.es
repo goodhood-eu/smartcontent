@@ -19,8 +19,8 @@ const transforms = [
   formFeedToSpace,
 ];
 
-const process = (originalText) => (
+const transform = (originalText) => (
   transforms.reduce((text, item) => text.replace(item.pattern, item.replace), originalText.trim())
 );
 
-export default process;
+export default transform;
