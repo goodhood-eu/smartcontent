@@ -1,10 +1,9 @@
 {
   "presets": [
-    ["env", { "useBuiltIns": true }],
-    "stage-3"
+    "@babel/preset-env"
   ],
   "plugins": [
-    ["transform-runtime", { "polyfill": false, "regenerator": true, "helpers": true }],
+    "add-module-exports",
     "transform-node-env-inline"
   ]
 }
