@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 const { unicodeLength } = require('../lib/strings');
-const createParser = require('../lib').default;
+const createParser = require('../lib');
 
 let process = null;
 
