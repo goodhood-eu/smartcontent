@@ -21,7 +21,7 @@
     "check": "npm test && npm run lint && echo \"\\033[0;32mReady to publish\\033[0m\"",
     "clean": "rm -rf ./lib/ || exit 1",
     "build:babel": "NODE_ENV=production babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm check && npm run clean && npm run build:babel",
+    "prepublishOnly": "npm run check && npm run clean && npm run build:babel",
     "lint": "eslint ./",
     "lint:tofile": "eslint --no-color -o ./eslint-report.log ./",
     "test": "npm run build:babel && TZ='GMT' mocha \"test/**/*.js\"",
