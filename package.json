@@ -6,7 +6,7 @@
   "readmeFilename": "README.md",
   "repository": "good-hood-gmbh/smartcontent",
   "bugs": "https://github.com/good-hood-gmbh/smartcontent/issues",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "keywords": [
     "content",
     "parser",
@@ -17,13 +17,15 @@
     "node": "^10.x.x"
   },
   "scripts": {
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "check": "npm test && npm run lint && echo \"\\033[0;32mReady to publish\\033[0m\"",
     "clean": "rm -rf ./lib/ || exit 1",
     "build:babel": "NODE_ENV=production babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run clean && npm run build:babel",
+    "prepublishOnly": "npm check && npm run clean && npm run build:babel",
     "lint": "eslint ./",
     "lint:tofile": "eslint --no-color -o ./eslint-report.log ./",
-    "test": "npm run build:babel && env TZ='Europe/Berlin' mocha \"test/**/*.js\"",
-    "test:tofile": "npm run build:babel && mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log"
+    "test": "npm run build:babel && TZ='GMT' mocha \"test/**/*.js\"",
+    "test:tofile": "npm run build:babel && TZ='GMT' mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
