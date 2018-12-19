@@ -9,5 +9,5 @@ trie.addAll(list);
 
 const string = `(${trie.toString()})`;
 
-fs.writeFileSync(file, `// GENERATED AUTOMATICALLY, DO NOT EDIT\nexport default '${string}';`);
+fs.writeFileSync(file, `// GENERATED AUTOMATICALLY, DO NOT EDIT\nmodule.exports = '${string}';`);
 console.log('RegExp generated');
