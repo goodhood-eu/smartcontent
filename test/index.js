@@ -138,6 +138,9 @@ describe('index', () => {
     const chineseDomain = '访问我的新网站 阴茎.電訊盈科!';
     const expectedChineseDomain = '访问我的新网站 <a href="http://阴茎.電訊盈科">阴茎.電訊盈科</a>!';
 
+    const multisubdomain = 'Bayes is lit https://de.m.wikipedia.org/wiki/Thomas_Bayes lmao';
+    const expectedMultisubdomain = 'Bayes is lit <a href="https://de.m.wikipedia.org/wiki/Thomas_Bayes">https://de.m.wikipedia.org/…</a> lmao';
+
     assert.equal(transform(notADomain), notADomain, 'domain-like string didn\'t get parsed');
     assert.equal(transform(domainLike), expectedDomainLike, 'weird domain-like url highlighted only url-like part');
     assert.equal(transform(domainLikeTypo), domainLikeTypo, 'domain-like typos are not transformed');
@@ -154,6 +157,7 @@ describe('index', () => {
     assert.equal(transform(newTLDS), expectedNewTLDS, 'new extended TLDS');
     assert.equal(transform(nationalDomain), expectedNationalDomain, 'natial domain');
     assert.equal(transform(chineseDomain), expectedChineseDomain, 'chinese symbols parsing');
+    assert.equal(transform(multisubdomain), expectedMultisubdomain, 'multi level subdomain');
   });
 
   it('transform - weird URL detection', () => {
