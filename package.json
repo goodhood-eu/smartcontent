@@ -6,7 +6,7 @@
   "readmeFilename": "README.md",
   "repository": "good-hood-gmbh/smartcontent",
   "bugs": "https://github.com/good-hood-gmbh/smartcontent/issues",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "keywords": [
     "content",
     "parser",
@@ -30,14 +30,14 @@
     "test:tofile": "npm run compile && TZ='GMT' mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-json-strings": "^7.2.0",
     "@babel/plugin-transform-strict-mode": "^7.2.0",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-env": "^7.6.2",
     "babel-plugin-add-module-exports": "^1.0.2",
     "chai": "^4.2.0",
-    "eslint": "^6.1.0",
+    "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.17.3",
     "mocha": "^6.1.4",
