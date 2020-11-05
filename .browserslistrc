@@ -1,7 +1,3 @@
 # Browsers that we support. To see current list: `npx browserslist`
 
-last 2 major versions
-> 1%
-not dead
-not op_mini all
-not ie_mob > 0
+extends browserslist-config-nebenan
