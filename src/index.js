@@ -1,5 +1,5 @@
 /* eslint no-use-before-define: "off" */
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import { injectOrder } from './utils';
 import { unicodeLength, shortenString } from './strings';
 import normalize from './normalize';

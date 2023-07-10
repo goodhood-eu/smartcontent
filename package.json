@@ -45,6 +45,6 @@
   },
   "dependencies": {
     "escape-html": "^1.0.3",
-    "lodash.merge": "^4.6.2"
+    "lodash": "^4.17.21"
   }
 }
