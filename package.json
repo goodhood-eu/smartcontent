@@ -1,11 +1,11 @@
 {
   "name": "smartcontent",
   "description": "Converts UGC to HTML",
-  "author": "Nebenan.de <max@nebenan.de>",
+  "author": "Good Hood GmbH <tech@nebenan.de>",
   "license": "MIT",
-  "readmeFilename": "README.md",
-  "repository": "good-hood-gmbh/smartcontent",
-  "bugs": "https://github.com/good-hood-gmbh/smartcontent/issues",
+  "homepage": "https://github.com/goodhood-eu/smartcontent#readme",
+  "repository": "github:goodhood-eu/smartcontent",
+  "bugs": "https://github.com/goodhood-eu/smartcontent/issues",
   "version": "3.10.1",
   "keywords": [
     "content",
