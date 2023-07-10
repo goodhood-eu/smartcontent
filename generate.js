@@ -2,7 +2,7 @@ const fs = require('fs');
 const { Trie } = require('regexgen');
 const list = require('tlds');
 
-const file = `${__dirname}/src/tlds.es`;
+const file = `${__dirname}/src/tlds.js`;
 
 const trie = new Trie();
 trie.addAll(list);
