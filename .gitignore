@@ -26,7 +26,6 @@ node_modules/*
 
 # Users Environment Variables
 .lock-wscript
-.idea
 .scripts
 
 # MacOS
@@ -34,3 +33,11 @@ node_modules/*
 
 # Compiled files
 lib/
+
+# Code editors
+.vscode
+.idea
+
+# Yalc
+.yalc
+yalc.lock

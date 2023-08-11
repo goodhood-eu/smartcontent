@@ -1,12 +1,12 @@
 {
   "name": "smartcontent",
   "description": "Converts UGC to HTML",
-  "author": "Nebenan.de <max@nebenan.de>",
+  "author": "Good Hood GmbH <tech@nebenan.de>",
   "license": "MIT",
-  "readmeFilename": "README.md",
-  "repository": "good-hood-gmbh/smartcontent",
-  "bugs": "https://github.com/good-hood-gmbh/smartcontent/issues",
-  "version": "3.10.1",
+  "homepage": "https://github.com/goodhood-eu/smartcontent#readme",
+  "repository": "github:goodhood-eu/smartcontent",
+  "bugs": "https://github.com/goodhood-eu/smartcontent/issues",
+  "version": "3.11.0",
   "keywords": [
     "content",
     "parser",
@@ -29,22 +29,21 @@
     "test:tofile": "npm run build && TZ='GMT' mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
-    "@babel/plugin-proposal-json-strings": "^7.12.1",
-    "@babel/plugin-transform-strict-mode": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-transform-strict-mode": "^7.22.5",
+    "@babel/preset-env": "^7.22.10",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "browserslist-config-nebenan": "^1.0.0",
-    "chai": "^4.2.0",
-    "eslint": "^7.13.0",
-    "eslint-config-nebenan-base": "^1.6.0",
-    "mocha": "^8.2.1",
+    "browserslist-config-nebenan": "^1.0.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.46.0",
+    "eslint-config-nebenan-base": "^2.0.2",
+    "mocha": "^10.2.0",
     "regexgen": "^1.3.0",
-    "tlds": "^1.212.0"
+    "tlds": "^1.242.0"
   },
   "dependencies": {
     "escape-html": "^1.0.3",
-    "lodash.merge": "^4.6.2"
+    "lodash": "^4.17.21"
   }
 }
